@@ -1,1 +1,44 @@
-<h1>Hello, World!</h1>
+{% extends 'notes/layout.html' %}
+{% load static %}
+
+{% block includes %}
+<link rel="stylesheet" href="{% static 'notes/index_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<h3>
+    Недавние выпуски:
+</h3>
+{% if latest_articles_list %}
+    <ul class="titles">
+        {% for article in latest_articles_list %}
+            <li><a href="{% url 'notes:detail' article.id %}">
+                {{ article.heading }}
+            </a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No articles are available</p>
+{% endif %}
+<h3>
+    Оглавление:
+</h3>
+
+<ul class="first-level">
+    {% for part, chapters in tree.items %}
+        <li>{{ part.name }}</li>
+        <ul class="second-level">
+            {% for chapter, articles in chapters.items %}
+                <li>{{chapter.name}}</li>
+                <ul>
+                {% for article in articles %}
+                    <li>{{article}}</li>
+                {% endfor %}
+                </ul>
+
+            {% endfor %}
+        </ul>
+        
+    {% endfor %}
+</ul>
+{% endblock %}

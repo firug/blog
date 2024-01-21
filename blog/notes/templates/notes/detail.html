@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'notes/main_style.css' %}">
+
+
+{% if art %}
+    <h1 name="heading">{{art.heading}}</h1>
+    <p name="body">{{art.body}}</p>
+    <p></p>
+    <p name="pub_date">Дата публикации: {{art.pub_date}}</p>
+    <p name="last_edit_date">Дата последнего изменения: {{art.last_edit_date}}</p>
+
+
+{% endif %}

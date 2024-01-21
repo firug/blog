@@ -1,0 +1,114 @@
+.header{
+    background-color: #2e2e2e;
+    padding: 15px 25px;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-bottom: 40px;
+    display: block;
+}
+
+.header div {
+    display: inline-block;
+    font-size: large;
+}
+
+.header-left {
+    text-align: center;
+    margin-left: 20px;
+}
+
+.header-right {
+    text-align: center;
+    float: right;
+}
+
+.header-right > .left-moved-first{
+    margin-right: 20px;
+}
+
+.left-moved {
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+.header a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+body {
+    background-color: #212121;
+    color: white;
+    display: block;
+    font: 'Verdana';
+}
+
+.menu { 
+    list-style: none;
+    display: inline-block;
+}
+
+.submenu-item {
+    display: block;
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.menu-item > a{
+    display: block;
+    width: 200px;
+    color: white;
+}
+
+.submenu-item > a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.element {
+    display: block;
+    position: absolute;
+    height: 200px;
+    right: 45px;
+}
+
+.menu .submenu {
+    opacity: 0;
+    visibility: hidden;
+    width: min-content;
+
+    list-style: none;
+
+    transition-property: opacity, visibility;
+    transition-duration: 0.4s;
+    transition-delay: 0.15s;
+}
+
+.menu .menu-item:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-item a:hover {
+    background-color: #6c6868;
+}
+
+.menu .submenu-item:hover a {
+    background-color: #6c6868;
+}
+
+
+
+main {
+    margin-top: 80px;
+}
