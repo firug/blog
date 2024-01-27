@@ -1,13 +1,20 @@
+{% extends "notes/layout.html"%}
 {% load static %}
+{% load markdown_extras %}
+
+{% block includes %}
 <link rel="stylesheet" href="{% static 'notes/main_style.css' %}">
+<link rel="stylesheet" href="{% static 'notes/detail_notes.css' %}">
+{% endblock %}
 
-
+{% block content %}
 {% if art %}
-    <h1 name="heading">{{art.heading}}</h1>
-    <p name="body">{{art.body}}</p>
-    <p></p>
-    <p name="pub_date">Дата публикации: {{art.pub_date}}</p>
-    <p name="last_edit_date">Дата последнего изменения: {{art.last_edit_date}}</p>
-
+    <h1 class="left-moved">{{art.chapter}}</h1>
+    <h2 class="left-moved">{{ art.heading}}</h2>
+    <div class="left-moved" name="note_detail_body">{{art.body| markdown | safe}}</div>
+    <p name="pub_date" class="left-moved">Дата публикации: {{art.pub_date}}</p>
+    <p name="last_edit_date" class="left-moved">Дата последнего изменения: {{art.last_edit_date}}</p>
 
 {% endif %}
+
+{% endblock %}

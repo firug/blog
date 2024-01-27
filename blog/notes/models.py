@@ -1,4 +1,5 @@
 from django.db import models
+from martor.models import MartorField
 
 class Partition(models.Model):
     name = models.CharField(max_length=200)
@@ -12,6 +13,11 @@ class Chapter(models.Model):
 
     def __str__(self) -> str:
         return str(self.name)
+
+
+
+class Post(models.Model):
+    description = MartorField()
 
 class Article(models.Model):
     chapter = models.ForeignKey(Chapter, models.SET_NULL, blank=True, null=True)
