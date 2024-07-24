@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django_bootstrap_icons",
     "martor",
+    "markdownx"
 ]
 
 MIDDLEWARE = [

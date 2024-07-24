@@ -1,0 +1,10 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'markdownxStyles/main_styles.css' %}">
+<div class="markdownx">
+    <div class="block">
+        {% include 'django/forms/widgets/textarea.html' %}
+    </div>
+    <div class="block">
+        <div class="markdownx-preview"></div>
+    </div>
+</div>

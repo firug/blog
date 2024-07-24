@@ -3,3 +3,7 @@ div[name="note_detail_body"] {
     width: 800px;
 
 }
+
+.upper_case {
+    text-transform: uppercase;
+}

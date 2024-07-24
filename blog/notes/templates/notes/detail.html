@@ -9,9 +9,8 @@
 
 {% block content %}
 {% if art %}
-    <h1 class="left-moved">{{art.chapter}}</h1>
-    <h2 class="left-moved">{{ art.heading}}</h2>
-    <div class="left-moved" name="note_detail_body">{{art.body| markdown | safe}}</div>
+    <h1 class="left-moved upper_case">{{ art.heading }} </h1>
+    <div class="left-moved" name="note_detail_body">{{art.body|markdown }}</div>
     <p name="pub_date" class="left-moved">Дата публикации: {{art.pub_date}}</p>
     <p name="last_edit_date" class="left-moved">Дата последнего изменения: {{art.last_edit_date}}</p>
 
