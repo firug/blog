@@ -21,5 +21,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('notes/', include('notes.urls')),
-    path('markdownx/', include('markdownx.urls'))
+    path('markdownx/', include('markdownx.urls')),
+    path('about/', include('about.urls')),
+    path('users', include('users.urls')),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
