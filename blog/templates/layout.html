@@ -15,31 +15,29 @@
 </html>
 
 <body>
-    <div class="header">
-            <div class="header-left"><a href="{% url 'notes:index' %}">Mind Space</a></div>
-            <div class="header-right">
-                <a href="{% url 'notes:index' %}" class="left-moved-first">
-                    {% bs_icon 'house' size="24px" %}Главная
-                </a>
-                <a href="{% url 'about:about_me'}" class="left-moved"><i class="bi bi-file-person-fill"></i> Об авторе</a>
-
-                <ul class="menu ">
-                    <li class="menu-item">
-                        <a href=#><i class="bi bi-list"></i> Меню</a>
-                        <div class="element">
-                        <ul class="submenu">
-                            {% if partitions %}
-                                {% for part in partitions%}
-                                    <li class="submenu-item"><a href=#>{{part.name}}</a></li>
-                                {% endfor %}
-                            {% else %}
-                            {% endif %}
-                        </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-    </div>
+    <header class="header">
+        <div class="logo item1">
+            <a id="logo-anchor" href="{% url 'notes:index' %}">
+                Тошнота
+            </a>
+        </div>
+        <div class="item2">
+            <a href="#" class="blink"><i class="bi bi-pen middle-icon"></i></a>
+        </div>
+        <div class="item3">
+            <a href="#" class="blink"><i class="bi bi-person-circle middle-icon"></i></a>
+        </div>
+        <nav class="nav item4">
+            <ul>
+                <li>
+                    <a href="#menu" class="blink">
+                        <i class="bi bi-list large-icon"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+    </header>
     <main>
         {% block content %}
         {% endblock %}

@@ -1,8 +1,10 @@
-from django.urls import path
-from .views import SomeShittyClass
+from django.urls import path, include
+from django.contrib import admin
+from . import views
 
 app_name = 'users'
 
 urlpatterns = [
-    path('users', SomeShittyClass.as_view(), name='users'),
+    path('profile/', views.profile, name='profile'),
+    path('singup/', views.signup, name='signup'),
 ]

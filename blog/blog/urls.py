@@ -23,6 +23,10 @@ urlpatterns = [
     path('notes/', include('notes.urls')),
     path('markdownx/', include('markdownx.urls')),
     path('about/', include('about.urls')),
-    path('users', include('users.urls')),
+    path('users/', include('users.urls')),
+    path('users/accounts/', include('django.contrib.auth.urls')),
+] 
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

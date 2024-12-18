@@ -21,6 +21,11 @@ class Article(models.Model):
     body = MarkdownxField(max_length=2000)
     pub_date = models.DateTimeField(auto_now_add=True)
     last_edit_date = models.DateTimeField(auto_now=True)
+    image = models.ImageField(
+        verbose_name='Изображение',
+        upload_to='articles/',
+        blank=True,
+    )
 
     def __str__(self) -> str:
         return str(self.heading)

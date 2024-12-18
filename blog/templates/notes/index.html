@@ -7,9 +7,10 @@
 {% endblock %}
 
 {% block content %}
-<h3>
-    Недавние выпуски:
-</h3>
+<p>«Desine sperare qui hic intras» — Оставь надежду всяк сюда входящий</p>
+<h5>
+    Недавний выпуск:
+</h5>
 {% if latest_articles_list %}
     <ul class="titles">
         {% for article in latest_articles_list %}
@@ -21,9 +22,9 @@
 {% else %}
     <p>No articles are available</p>
 {% endif %}
-<h3>
-    Оглавление:
-</h3>
+<h5>
+    Выпуски:
+</h5>
 
 <ul class="first-level">
     {% for part, chapters in tree.items %}
