@@ -11,7 +11,12 @@
 {% if art %}
     <h1 class="left-moved upper_case">{{ art.heading }} </h1>
     <div class="left-moved" name="note_detail_body">{{art.body|markdown }}</div>
-    <p>Автор: {{art.author.first_name}}  {{art.author.last_name }}</p>
+    <p>Авторы:
+        {% for author in art.authors.all %}
+            {{ author.first_name }} {{author.last_name}}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+<p>{{ article.content }}</p>
     <p name="pub_date" class="left-moved">Дата публикации: {{art.pub_date}}</p>
     <p name="last_edit_date" class="left-moved">Дата последнего изменения: {{art.last_edit_date}}</p>
 

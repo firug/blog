@@ -28,7 +28,7 @@ class Article(models.Model):
         upload_to='articles/',
         blank=True,
     )
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', default=1)
+    authors = models.ManyToManyField(User, related_name='articles')
 
     def __str__(self) -> str:
         return str(self.heading)

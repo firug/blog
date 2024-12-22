@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse, render, get_object_or_404, redirect
-from django.http import Http404
+from django.contrib.auth.decorators import permission_required
 
 from .paginator import paginator
 from .models import Article, Partition, Chapter
@@ -31,6 +31,7 @@ def results(request, article_id):
 def comment(request, article_id):
     return HttpResponse("You're commenting on question %s." % article_id)
 
+@permission_required('notes.add_article', raise_exception=True)
 def add_article(request):
     if request.method == 'POST':
         form = ArticleWriteForm(request.POST, request.FILES)
@@ -42,6 +43,7 @@ def add_article(request):
                 image = form.cleaned_data['image'],
             )
             article.save()
+            article.authors.add(request.user)
             return redirect('notes:index')
     else:
         form = ArticleWriteForm()
