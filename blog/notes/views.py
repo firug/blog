@@ -42,7 +42,7 @@ def add_article(request):
                 image = form.cleaned_data['image'],
             )
             article.save()
-            return redirect('notes:home')
+            return redirect('notes:index')
     else:
         form = ArticleWriteForm()
     return render(request, 'notes/add_article.html', {'form': form})

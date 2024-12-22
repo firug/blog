@@ -17,12 +17,12 @@
             <a href="{% url 'notes:detail' article.id %}">
                 <div class="card-box">
                 {% if article.image %}
-                    <img class="fit-size" src="{{ elem.image.url }}" />
+                    <img class="fit-size" src="{{ article.image.url }}" />
                 {% else %}
                     <div class="fit-size linear-gradient"></div>
                 {% endif %}
                     <div class="overlay-text">{{ article.heading}}</div>
-                    <div class="appearing-text">{{article.body |truncatechars:100}}</div>
+                    <div class="appearing-text">{{article.body |truncatechars:100 | striptags}}</div>
                 </div>
             </a>
         {% endfor %}
@@ -38,15 +38,17 @@
 <div class="cards">
     {% for elem in articles %}
         <article>
-            <div class="card-box">
-                {% if elem.image %}
-                    <img class="fit-size" src="{{ elem.image.url }}" />
-                {% else %}
-                    <div class="fit-size linear-gradient"></div>
-                {% endif %}
-                <div class="overlay-text">{{ elem.heading}}</div>
-                <div class="appearing-text">{{elem.body |truncatechars:100 }}</div>
-            </div>
+            <a href="{% url 'notes:detail' elem.id %}">
+                <div class="card-box">
+                    {% if elem.image %}
+                        <img class="fit-size" src="{{ elem.image.url }}" />
+                    {% else %}
+                        <div class="fit-size linear-gradient"></div>
+                    {% endif %}
+                    <div class="overlay-text">{{ elem.heading}}</div>
+                    <div class="appearing-text">{{elem.body |truncatechars:100 |striptags}}</div>
+                </div>
+            </a>
             
         </article>
     {% endfor %}
