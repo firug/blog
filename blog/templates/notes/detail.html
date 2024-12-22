@@ -11,6 +11,7 @@
 {% if art %}
     <h1 class="left-moved upper_case">{{ art.heading }} </h1>
     <div class="left-moved" name="note_detail_body">{{art.body|markdown }}</div>
+    <p>Автор: {{art.author.first_name}}  {{art.author.last_name }}</p>
     <p name="pub_date" class="left-moved">Дата публикации: {{art.pub_date}}</p>
     <p name="last_edit_date" class="left-moved">Дата последнего изменения: {{art.last_edit_date}}</p>
 

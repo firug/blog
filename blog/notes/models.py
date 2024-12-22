@@ -1,6 +1,7 @@
 from django.db import models
 from markdownx.models import MarkdownxField
 from tinymce.models import HTMLField
+from django.contrib.auth.models import User
 
 class Partition(models.Model):
     name = models.CharField(max_length=200)
@@ -27,6 +28,7 @@ class Article(models.Model):
         upload_to='articles/',
         blank=True,
     )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', default=1)
 
     def __str__(self) -> str:
         return str(self.heading)
