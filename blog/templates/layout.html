@@ -25,16 +25,16 @@
             <a href="#" class="blink"><i class="bi bi-pen middle-icon"></i></a>
         </div>
         <div class="item3">
-            <a href="#" class="blink"><i class="bi bi-person-circle middle-icon"></i></a>
+            <a href="{% url 'users:profile' %}" class="blink"><i class="bi bi-person-circle middle-icon"></i></a>
         </div>
-        <nav class="nav item4">
-            <ul>
-                <li>
-                    <a href="#menu" class="blink">
-                        <i class="bi bi-list large-icon"></i>
-                    </a>
-                </li>
-            </ul>
+        <nav class="nav item4 dropdown">
+            <button href="#menu" class="blink dropbtn">
+                <i class="bi bi-list large-icon"></i>
+            </a>
+            <div class="dropdown-content">
+                <a href="{% url 'about:about_me' %}">О нас</a>
+                <a href="{% url 'about:about_project' %}">О проекте</a>
+            </div>
         </nav>
         
     </header>

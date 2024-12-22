@@ -1,24 +1,16 @@
-from django.shortcuts import HttpResponse, render, get_object_or_404
+from django.shortcuts import HttpResponse, render, get_object_or_404, redirect
 from django.http import Http404
 
+from .paginator import paginator
 from .models import Article, Partition, Chapter
+from .forms import ArticleWriteForm
 
 def index(request):
-    partitions = Partition.objects.all()
-    tree = {}
+    articles = Article.objects.order_by('-pub_date')
     
-    for part in partitions:
-        tree[part] = {}
-        chapters = Chapter.objects.filter(partition = part)
-        for chapt in chapters:
-            tree[part][chapt] = []
-            articles = Article.objects.filter(chapter = chapt)
-            for article in articles:
-                tree[part][chapt].append(article)
-
-    latest_articles_list = Article.objects.order_by("-pub_date")[:5]
+    latest_articles_list = Article.objects.order_by("-pub_date")[:2]
     context = {
-        "tree": tree,
+        "articles": paginator(request, articles, 8),
         "latest_articles_list": latest_articles_list,
     }
 
@@ -38,3 +30,19 @@ def results(request, article_id):
 
 def comment(request, article_id):
     return HttpResponse("You're commenting on question %s." % article_id)
+
+def add_article(request):
+    if request.method == 'POST':
+        form = ArticleWriteForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = Article(
+                chapter = form.cleaned_data['chapter'],
+                heading = form.cleaned_data['heading'],
+                body = form.cleaned_data['body'],
+                image = form.cleaned_data['image'],
+            )
+            article.save()
+            return redirect('notes:home')
+    else:
+        form = ArticleWriteForm()
+    return render(request, 'notes/add_article.html', {'form': form})

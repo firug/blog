@@ -14,6 +14,7 @@ body {
     color: #960740;
     font-size: 40px;
     font-family: serif;
+    text-decoration: none;
     transition: color 0.3s , text-decoration 0.3s ;
 }
 
@@ -22,11 +23,19 @@ body {
 }
 
 .blink i {
+    color: antiquewhite;
     transition: color 0.3s , text-decoration 0.3s ;
 }
 
 .blink:hover i {
     color: rgb(12, 92, 49);
+}
+
+.menu-toggle {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .nav ul {
@@ -67,16 +76,57 @@ body {
 
 .header {
     display: grid; /* Включаем Grid */
-    grid-template-columns: 80% 7% 7% auto; 
+    grid-template-columns: 80% 7% 5% auto; 
     align-items: center; /* Выравниваем элементы по вертикали */
     padding-top: 20px;
     color: white; /* Цвет текста */
 }
 
 main {
-    margin-top: 1em;
+    margin-top: 4em;
 }
 
 main p {
     margin-bottom: 1.5em;
+}
+
+.dropbtn {
+    background-color: #1a1a1d;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    transition: transform 0.5s ease; /* Анимация для увеличения изображения */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.5s ease; /* Анимация для увеличения изображения */
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: lightgrey;
+    min-width: 200px;
+    left: -1px;
+    z-index: 1;
+    opacity: 0; /* Блок изначально прозрачный */
+    transition: opacity 0.5s ease-in-out; /* Плавное изменение прозрачности */
+     pointer-events: none; /* Отключает взаимодействие */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: white;
+}
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    pointer-events: auto; 
 }

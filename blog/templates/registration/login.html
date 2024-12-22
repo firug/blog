@@ -7,4 +7,6 @@
   {{ form.as_p }}
   <button type="submit">Login</button>
 </form>
+
+<p>Нет аккаунта? Вам сюда -> <a href="{% url 'users:signup' %}">Зарегистрироваться</a></p>
 {% endblock %}

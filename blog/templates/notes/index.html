@@ -7,18 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<p>«Desine sperare qui hic intras» — Оставь надежду всяк сюда входящий</p>
+<p style="text-align: center;">«Desine sperare qui hic intras» — Оставь надежду всяк сюда входящий</p>
 <h5>
-    Недавний выпуск:
+    Недавние выпуски:
 </h5>
 {% if latest_articles_list %}
-    <ul class="titles">
+    <div class="cards">
         {% for article in latest_articles_list %}
-            <li><a href="{% url 'notes:detail' article.id %}">
-                {{ article.heading }}
-            </a></li>
+            <a href="{% url 'notes:detail' article.id %}">
+                <div class="card-box">
+                {% if article.image %}
+                    <img class="fit-size" src="{{ elem.image.url }}" />
+                {% else %}
+                    <div class="fit-size linear-gradient"></div>
+                {% endif %}
+                    <div class="overlay-text">{{ article.heading}}</div>
+                    <div class="appearing-text">{{article.body |truncatechars:100}}</div>
+                </div>
+            </a>
         {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <p>No articles are available</p>
 {% endif %}
@@ -26,22 +34,21 @@
     Выпуски:
 </h5>
 
-<ul class="first-level">
-    {% for part, chapters in tree.items %}
-        <li>{{ part.name }}</li>
-        <ul class="second-level">
-            {% for chapter, articles in chapters.items %}
-                <li>{{chapter.name}}</li>
-                <ul>
-                {% for article in articles %}
-                    <li>{{article.heading}}</li>
-                    <div>{{article.body|markdown }}</div>
-                {% endfor %}
-                </ul>
 
-            {% endfor %}
-        </ul>
-        
+<div class="cards">
+    {% for elem in articles %}
+        <article>
+            <div class="card-box">
+                {% if elem.image %}
+                    <img class="fit-size" src="{{ elem.image.url }}" />
+                {% else %}
+                    <div class="fit-size linear-gradient"></div>
+                {% endif %}
+                <div class="overlay-text">{{ elem.heading}}</div>
+                <div class="appearing-text">{{elem.body |truncatechars:100 }}</div>
+            </div>
+            
+        </article>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
