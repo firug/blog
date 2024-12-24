@@ -112,11 +112,22 @@ a {
 }
 
 .bordered {
-    border: 2px solid 007bff; /* Цвет и толщина границы */
-    width: 50%;
+    border: 2px solid #1a1a1d; 
     text-align: center;
     border-radius: 10px;
     background-color: rgb(61, 40, 40);
+}
+
+.common-width {
+  width: 50%;
+}
+
+.fulls-filled {
+  width: 100%;
+}
+
+.white-text {
+  color: white;
 }
 
 .background-blink {
@@ -131,4 +142,8 @@ a {
   transform: translateX(-10px); 
   display: flex;
   gap:10px;
+}
+
+#left {
+  width: 150%;
 }

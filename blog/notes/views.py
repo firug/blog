@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import permission_required
 from .paginator import paginator
 from .models import Article, Partition, Chapter
 from .forms import ArticleWriteForm
+from django.http import HttpResponseForbidden
 
 def index(request):
     articles = Article.objects.order_by('-pub_date')
@@ -12,6 +13,7 @@ def index(request):
     context = {
         "articles": paginator(request, articles, 8),
         "latest_articles_list": latest_articles_list,
+        'user': request.user,
     }
 
     return render(request, "notes/index.html", context)
@@ -31,9 +33,11 @@ def results(request, article_id):
 def comment(request, article_id):
     return HttpResponse("You're commenting on question %s." % article_id)
 
-@permission_required('notes.edit_article', raise_exception=True)
+@permission_required('notes.change_article', raise_exception=True)
 def edit_article(request, article_id):
     article = get_object_or_404(Article, id=article_id)
+    if not article.authors.filter(id=request.user.id).exists():
+        return HttpResponseForbidden("Вы не являетесь автором данного поста")
     if request.method == 'POST':
         form = ArticleWriteForm(request.POST, instance=article)
         if form.is_valid():
@@ -65,3 +69,12 @@ def add_article(request):
     else:
         form = ArticleWriteForm()
     return render(request, 'notes/add_article.html', {'form': form})
+
+@permission_required('notes.delete_article', raise_exception=True)
+def delete_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    if not article.authors.filter(id=request.user.id).exists():
+        return HttpResponseForbidden("Вы не можете удалить данный пост, так как вы не являетесь одним из его создателей")
+    if request.method == 'POST':
+        article.delete()
+        return redirect('notes:index')
