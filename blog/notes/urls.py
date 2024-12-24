@@ -8,5 +8,6 @@ urlpatterns = [
 	path("<int:article_id>/", views.detail, name="detail"),
 	path("<int:article_id>/results/", views.results, name="results"),
     path("<int:article_id>/comment/", views.comment, name="comment"),
-	path("add_article", views.add_article, name='add_article')
+	path("add_article", views.add_article, name='add_article'),
+    path("edit_article/<int:article_id>", views.edit_article, name='edit_article'),
 ]

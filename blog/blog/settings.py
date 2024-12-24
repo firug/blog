@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'users.apps.UsersConfig',
     'tinymce',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
+
+ASGI_APPLICATION = 'blog.asgi.application'
 
 LANGUAGE_CODE = 'en-us'
 

@@ -110,3 +110,25 @@ a {
     visibility: visible;
     transform: translate(0, -15px);
 }
+
+.bordered {
+    border: 2px solid 007bff; /* Цвет и толщина границы */
+    width: 50%;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(61, 40, 40);
+}
+
+.background-blink {
+  transition: background-color 0.3s ease;
+}
+
+.background-blink:hover {
+    background-color: rgb(168, 120, 62);
+}
+
+.horizontal{
+  transform: translateX(-10px); 
+  display: flex;
+  gap:10px;
+}

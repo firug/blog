@@ -1,6 +1,5 @@
 {% extends "layout.html"%}
 {% load static %}
-{% load markdown_extras %}
 
 {% block includes %}
 <link rel="stylesheet" href="{% static 'notes/main_style.css' %}">
@@ -10,7 +9,7 @@
 {% block content %}
 {% if art %}
     <h1 class="left-moved upper_case">{{ art.heading }} </h1>
-    <div class="left-moved" name="note_detail_body">{{art.body|markdown }}</div>
+    <div class="left-moved" name="note_detail_body">{{art.body |safe}}</div>
     <p>Авторы:
         {% for author in art.authors.all %}
             {{ author.first_name }} {{author.last_name}}{% if not forloop.last %}, {% endif %}

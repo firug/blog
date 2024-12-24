@@ -6,10 +6,10 @@ from tinymce.widgets import TinyMCE
 class MyForm(forms.Form):
     myfield = MarkdownxFormField()
 
-class ArticleWriteForm(forms.Form):
+class ArticleWriteForm(forms.ModelForm):
     chapter = forms.ModelChoiceField(queryset=Chapter.objects.all())
     heading = forms.CharField(max_length=200, required=True)
-    body = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    body = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30, 'id': 'tiny'}))
     image = forms.ImageField(
                 widget=forms.ClearableFileInput(attrs={'accept': 'image/*'}), required=False
     )

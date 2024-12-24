@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% load static %}
-{% load markdown_extras %}
+{% load custom_filters %}
 
 {% block includes %}
 <link rel="stylesheet" href="{% static 'notes/index_styles.css' %}">
@@ -22,7 +22,7 @@
                     <div class="fit-size linear-gradient"></div>
                 {% endif %}
                     <div class="overlay-text">{{ article.heading}}</div>
-                    <div class="appearing-text">{{article.body |truncatechars:100 | striptags}}</div>
+                    <div class="appearing-text">{{article.body | bleach_clean | truncatechars:100}}</div>
                 </div>
             </a>
         {% endfor %}
@@ -46,10 +46,13 @@
                         <div class="fit-size linear-gradient"></div>
                     {% endif %}
                     <div class="overlay-text">{{ elem.heading}}</div>
-                    <div class="appearing-text">{{elem.body |truncatechars:100 |striptags}}</div>
+                    <div class="appearing-text">{{elem.body | bleach_clean | truncatechars:100}}</div>
+                </div>
+                <div class="horizontal">
+                    <div class="bordered background-blink"><a href="{% url 'notes:edit_article' elem.id %}"><i class="bi bi-pencil"></i> Редактировать</a></div>
+                    <div class="bordered background-blink"><a href="{% url 'notes:edit_article' elem.id %}"><i class="bi bi-trash"></i> Удалить</a></div>
                 </div>
             </a>
-            
         </article>
     {% endfor %}
 </div>

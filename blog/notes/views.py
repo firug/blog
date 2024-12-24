@@ -31,6 +31,23 @@ def results(request, article_id):
 def comment(request, article_id):
     return HttpResponse("You're commenting on question %s." % article_id)
 
+@permission_required('notes.edit_article', raise_exception=True)
+def edit_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    if request.method == 'POST':
+        form = ArticleWriteForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('notes:detail', article_id = article.id)
+    else:
+        initial_data = {
+            'chapter' : article.chapter,
+            'heading' : article.heading,
+            'body': article.body,
+        }
+        form = ArticleWriteForm(initial=initial_data)
+    return render(request, "notes/edit_article.html", {'form': form})
+
 @permission_required('notes.add_article', raise_exception=True)
 def add_article(request):
     if request.method == 'POST':

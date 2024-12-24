@@ -22,12 +22,12 @@ body {
     color: rgb(12, 92, 49);
 }
 
-.blink i {
+.blink {
     color: antiquewhite;
     transition: color 0.3s , text-decoration 0.3s ;
 }
 
-.blink:hover i {
+.blink:hover {
     color: rgb(12, 92, 49);
 }
 
