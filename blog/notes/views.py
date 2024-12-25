@@ -40,7 +40,6 @@ def edit_article(request, article_id):
     if (not article.authors.filter(id=request.user.id).exists()):
         return HttpResponseForbidden("Вы не являетесь автором данного поста")
     condition = (article.is_locked)
-    print(condition)
     if (condition and (not article.locked_by.filter(id=request.user.id).exists())):
         return HttpResponseForbidden("Статья редактируется другим пользователем")
 
@@ -53,7 +52,7 @@ def edit_article(request, article_id):
         if form.is_valid():
             form.save()
             article.is_locked = False
-            article.locked_by = None
+            article.locked_by.clear()
             article.save()
             return redirect('notes:detail', article_id = article.id)
     else:
