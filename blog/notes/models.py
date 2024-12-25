@@ -30,5 +30,9 @@ class Article(models.Model):
     )
     authors = models.ManyToManyField(User, related_name='articles')
 
+    # блокировка модели
+    is_locked = models.BooleanField(default=False)
+    locked_by = models.ManyToManyField(User, blank=True, default=None)
+
     def __str__(self) -> str:
         return str(self.heading)

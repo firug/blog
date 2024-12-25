@@ -1,9 +1,11 @@
 {% extends 'layout.html' %} 
+{% load static%}
 {% block includes %}
     {{form.media}}
 {% endblock includes %}
 
 {% block content %}
+<script src="{% static 'js/unlock_note.js' %}"></script>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}

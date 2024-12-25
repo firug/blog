@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import permission_required
 from .paginator import paginator
 from .models import Article, Partition, Chapter
 from .forms import ArticleWriteForm
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     articles = Article.objects.order_by('-pub_date')
@@ -36,12 +37,24 @@ def comment(request, article_id):
 @permission_required('notes.change_article', raise_exception=True)
 def edit_article(request, article_id):
     article = get_object_or_404(Article, id=article_id)
-    if not article.authors.filter(id=request.user.id).exists():
+    if (not article.authors.filter(id=request.user.id).exists()):
         return HttpResponseForbidden("Вы не являетесь автором данного поста")
+    condition = (article.is_locked)
+    print(condition)
+    if (condition and (not article.locked_by.filter(id=request.user.id).exists())):
+        return HttpResponseForbidden("Статья редактируется другим пользователем")
+
+    article.is_locked = True
+    article.locked_by.add(request.user.id)
+    article.save()
+
     if request.method == 'POST':
         form = ArticleWriteForm(request.POST, instance=article)
         if form.is_valid():
             form.save()
+            article.is_locked = False
+            article.locked_by = None
+            article.save()
             return redirect('notes:detail', article_id = article.id)
     else:
         initial_data = {
@@ -78,3 +91,11 @@ def delete_article(request, article_id):
     if request.method == 'POST':
         article.delete()
         return redirect('notes:index')
+    
+@csrf_exempt
+def unlock_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    article.is_locked = False
+    article.locked_by = None
+    article.save()
+    return JsonResponse({'status' : 'success'})
